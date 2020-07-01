@@ -149,5 +149,5 @@ void loop() {
   //Serial.println("Light Slepp 5 min");
   //wifi_set_sleep_type(LIGHT_SLEEP_T);
   //delay(300000);
-  delay(300);
+  delay(2000); //delay for 2 sec
 }
