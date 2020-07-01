@@ -85,8 +85,10 @@ void setup() {
   // Set pressure to read only
   weatherPres.readOnly = "true";
 
-  // Set title to "Environmental Air Quality"
-  weatherGas.title = "Environmental Air Quality";
+  // Set title to "Env. Air Quality"
+  weatherGas.title = "Env. Air Quality";
+  // Set unit for pressure to KOhms
+  weatherPres.unit = "KOhms";
   // Set environmental gas to read only
   weatherGas.readOnly = "true";
 
