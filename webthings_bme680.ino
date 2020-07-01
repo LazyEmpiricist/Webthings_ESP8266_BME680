@@ -70,25 +70,31 @@ void setup() {
   // Set unit for temperature (fahrenheit or celsius)
   weatherTemp.unit = "celsius";
 
+  // Set title to "Humidity"
+  weatherHum.title = "Humidity";
   // Set unit for humidity (%)
   weatherHum.unit = "percent";
   // Set humidity as read only (otherweise you may change the values in the gateway interface
   weatherHum.readOnly = "true";
-  // Set title to "Humidity"
-  weatherHum.title = "Humidity";
-  
+
+
+  // Set title to "Pressure"
+  weatherPres.title = "Pressure";
   // Set unit for pressure to hPa
   weatherPres.unit = "hPa";
   // Set pressure to read only
   weatherPres.readOnly = "true";
-  
+
+  // Set title to "Environmental Air Quality"
+  weatherGas.title = "Environmental Air Quality";
   // Set environmental gas to read only
   weatherGas.readOnly = "true";
-    
+
   weather.addProperty(&weatherTemp);
   weather.addProperty(&weatherPres);
   weather.addProperty(&weatherHum);
   weather.addProperty(&weatherGas);
+
   adapter->addDevice(&weather);
   adapter->begin();
 
@@ -96,7 +102,7 @@ void setup() {
 
 void loop() {
   if (! bme.performReading()) {
-    Serial.println("Failed to perform reading :(");
+    Serial.println("Failed to perform reading : (");
     return;
   }
 
@@ -117,7 +123,7 @@ void loop() {
 
   Serial.print("Humidity = ");
   Serial.print(hum);
-  Serial.println(" %");
+  Serial.println(" % ");
 
   Serial.print("Gas = ");
   Serial.print(gas);
