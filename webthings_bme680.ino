@@ -24,7 +24,7 @@ WebThingAdapter *adapter;
 const char *bme680Types[] = {"TemperatureSensor", nullptr};
 ThingDevice weather("Exmpbme680", "Example BME680 Weather Sensor", bme680Types); //first "Exmpbme680": unique name for every connected "Webthing", second "Example BME680 Weather Sensor": name in Webthings, third bme680Types: as above
 ThingProperty weatherTemp("temperature", "", NUMBER, "TemperatureProperty");
-ThingProperty weatherHum("humidity", "", NUMBER, nullptr);
+ThingProperty weatherHum("humidity", "", NUMBER, "LevelProperty"); // Set humidity as level-property
 ThingProperty weatherPres("pressure", "", NUMBER, nullptr);
 ThingProperty weatherGas("air-quality", "", NUMBER, nullptr);
 
@@ -67,7 +67,24 @@ void setup() {
 
   adapter = new WebThingAdapter("ExmpweathersensorBME680", WiFi.localIP()); //unique name for adapter (here: same as device above) and localIP
 
+  // Set unit for temperature (fahrenheit or celsius)
   weatherTemp.unit = "celsius";
+
+  // Set unit for humidity (%)
+  weatherHum.unit = "percent";
+  // Set humidity as read only (otherweise you may change the values in the gateway interface
+  weatherHum.readOnly = "true";
+  // Set title to "Humidity"
+  weatherHum.title = "Humidity";
+  
+  // Set unit for pressure to hPa
+  weatherPres.unit = "hPa";
+  // Set pressure to read only
+  weatherPres.readOnly = "true";
+  
+  // Set environmental gas to read only
+  weatherGas.readOnly = "true";
+    
   weather.addProperty(&weatherTemp);
   weather.addProperty(&weatherPres);
   weather.addProperty(&weatherHum);
