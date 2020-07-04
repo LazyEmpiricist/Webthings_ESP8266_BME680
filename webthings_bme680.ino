@@ -22,9 +22,15 @@ Adafruit_BME680 bme; // I2C
 WebThingAdapter *adapter;
 
 const char *bme680Types[] = {"TemperatureSensor", nullptr};
-ThingDevice weather("Exmpbme680", "Example BME680 Weather Sensor", bme680Types); //first "Exmpbme680": unique name for every connected "Webthing", second "Example BME680 Weather Sensor": name in Webthings, third bme680Types: as above
+// Creating the Webthing
+// "Exmpbme680": unique name for every connected "Webthing",
+// "Example BME680 Weather Sensor": name in Webthings,
+// bme680Types: as above
+ThingDevice weather("ExmpBME680", "Example BME680 Weather Sensor", bme680Types);
+// Set temperature property
 ThingProperty weatherTemp("temperature", "", NUMBER, "TemperatureProperty");
-ThingProperty weatherHum("humidity", "", NUMBER, "LevelProperty"); // Set humidity as level-property
+// Set humidity as level-property
+ThingProperty weatherHum("humidity", "", NUMBER, "LevelProperty");
 ThingProperty weatherPres("pressure", "", NUMBER, nullptr);
 ThingProperty weatherGas("air-quality", "", NUMBER, nullptr);
 
@@ -65,16 +71,18 @@ void setup() {
   bme.setIIRFilterSize(BME680_FILTER_SIZE_3);
   bme.setGasHeater(320, 150); // 320*C for 150 ms
 
-  adapter = new WebThingAdapter("ExmpweathersensorBME680", WiFi.localIP()); //unique name for adapter (here: same as device above) and localIP
+  // unique name for adapter (here: same as device above) and localIP
+  adapter = new WebThingAdapter("ExmpBME680", WiFi.localIP());
 
-  // Set unit for temperature (fahrenheit or celsius)
-  weatherTemp.unit = "celsius";
+  // Set unit for temperature 
+  weatherTemp.unit = "degree celsius";
 
   // Set title to "Humidity"
   weatherHum.title = "Humidity";
   // Set unit for humidity (%)
   weatherHum.unit = "percent";
-  // Set humidity as read only (otherweise you may change the values in the gateway interface
+  // Set humidity as read only
+  // (otherweise you may change the values in the gateway interface)
   weatherHum.readOnly = "true";
 
 
@@ -149,5 +157,5 @@ void loop() {
   //Serial.println("Light Slepp 5 min");
   //wifi_set_sleep_type(LIGHT_SLEEP_T);
   //delay(300000);
-  delay(2000); //delay for 2 sec
+  delay(2000);
 }
